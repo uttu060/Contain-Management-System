@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		function plot()
+		{
+			var ap = document.plotting.networkType.value;
+			var mob = Number(document.plotting.nms.value);
+			var pc = Number(document.plotting.ncs.value);
+			var CX = 320, CY = 320;
+			var N = mob + pc;
+			var side,x,y,i,temp,R;
+			
+			var canvas = document.getElementById("myCanvas");
+			var ctx = canvas.getContext("2d");
+			var aps = document.getElementById("aps");
+			var mbl = document.getElementById("mbl");
+			var pcs = document.getElementById("pcs");
+			var msg = "";
+			
+			ctx.fillStyle = 'wheat';
+			ctx.fillRect(0, 0, 700, 700); //refreshing canvas for new topology
+			
+			if(N>30)
+				side = 45;
+			else if(N>10)
+				side = 50;
+			else
+				side = 100;
+				
+			temp = Math.PI / N ; // part of the RE
+			R = Math.round(side / (2 * Math.sin(temp)));  // part of the RE
+			
+			if(mob==0 && pc==0)
+				document.getElementById("desc").innerHTML = "\t >> Insufficient data to construct data.";
+			else if(N>45)
+				document.getElementById("desc").innerHTML = "\t >> Insufficient space to construct topology.";
+			else
+			{
+				if(ap == 1)
+				{
+					ctx.drawImage(aps, CX, CY, 50,50);
+					msg = "\t >> Network Type : Infrastructure \n \t >> No. of Total Station: "+N+"\n \t >> No. of Mobile Station: "+mob+"\n \t >> No. of Computer Station: "+pc;
+				}
+				else
+					msg = "\t >> Network Type : Ad - Hoc \n \t >> No. of Total Station: "+N+"\n \t >> No. of Mobile Station: "+mob+"\n \t >> No. of Computer Station: "+pc;
+			
+				for(i=0; i<N; i++)
+				{
+					//RE for X-Coordinates
+					x = Math.round(CX + R * Math.cos(temp * (1 + 2 * i))); 
+					//RE for Y-Coordinates
+					y = Math.round(CY + R * Math.sin(temp * (1 + 2 * i)));
+				
+					if(mob!=0)
+					{
+						ctx.drawImage(mbl, x, y, 50, 50);
+						mob= mob-1;
+					}
+					else
+						ctx.drawImage(pcs, x, y, 50, 50);
+				
+				}
+				document.getElementById("desc").innerHTML = msg;
+			}
+		}
+	</script>
+</head>
+<body>
+<form name="plotting">
+	<table border=1>
+		<tr>
+			<td>Network Type: <select name="networkType">
+			<option value="0">Adhoc</option>
+			<option value="1">Infra</option>
+			</select></td>
+			<td>No. of Mobile Stations: <input name="nms" type="number" min="0"></td>
+			<td>No. of Computer Stations: <input name="ncs" type="number" min="0"></td>
+			<td colspan=2 align="center"><button type=button onclick=plot()>Generate Topology</button></td>
+			<td rowspan=2 valign="top"><b><i>Note: The space can only accommodate a total of 45stations. <br><br><br>
+				</i></b><img id="aps" width="50" height="50" src="aps.png"> >> Access Point<br><br><br>
+				<img id="mbl" width="50" height="50" src="mbl.png"> >> Mobile Station<br><br><br>
+				<img id="pcs" width="50" height="50" src="pcs.png"> >> Computer Station<br><br><br>
+				<hr>
+				<h3 align="center">Description of the Topology Generated</h3><br>
+				<pre id="desc"><i>	Please Generate Topology</i><pre></td>
+		</tr>
+		<tr align="center">
+			<td colspan=4>
+				<canvas id="myCanvas" width="700" height="700">
+				</canvas>
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

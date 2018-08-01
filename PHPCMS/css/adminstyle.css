@@ -1,0 +1,64 @@
+.navbar-nav li{
+	font-weight: bolder;
+	font-family: Bitter,Georgia,Times,"Times New Roman",serif;
+	font-size: 1.2em;
+}
+.Line{
+	margin-top: -20px;
+}
+
+
+body{
+	
+		background-color: #1ab394;
+	
+} 	
+.col-sm-10{
+	background-color: #ffffff;
+}
+#Side_Menu a{
+	color: #ffffff;
+}
+#Side_Menu .active a{
+	color: #ffffff;
+	background-color: #27AAE1;
+	font-weight: bold;
+}
+#Side_Menu a:hover{
+	color: #ffffff;
+	background-color: #1ab394;
+	font-weight: bold;
+	display: block;
+} 	
+#Footer{
+	padding:10px;
+	border-top: 1px solid black;
+	color:#eeeeee;
+	background-color: #211f22;
+	text-align: center;
+}
+.user{
+	height:150px;
+	width:150px;
+	overflow:hidden;
+	position:absolute;
+	top:calc(-1px/2);
+	left:calc(43% - 50px);
+}
+.pic{
+	height:100;
+	width:120;
+	
+}
+.lead{
+	font-weight: bolder;
+	font-size: 2.5em;
+	font-family: Bitter;
+}
+.icons{
+	height:80;
+	width:80;
+}
+
+
+

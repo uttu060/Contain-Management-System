@@ -1,0 +1,17 @@
+.p{
+	padding: 20px 50px;
+	border-radius: 5px;
+}
+.user{
+	height:150px;
+	width:150px;
+	overflow:hidden;
+	position:absolute;
+	top:calc(-1px/2);
+	left:calc(43% - 50px);
+}
+.pic{
+	height:100;
+	width:120;
+	
+}
